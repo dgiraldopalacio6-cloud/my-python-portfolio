@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Project Showcase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1>Project Showcase</h1>
+            <p class="lead">Selected Flask and Python projects demonstrating traceability, automation, and
+                production-ready patterns.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="projects">
+            {% for p in projects %}
+            <article class="card">
+                <div class="card-media">
+                    <img src="{{ p.screenshot }}" alt="{{ p.title }} screenshot"
+                        onerror="this.src='{{ url_for('static', filename='screenshots/placeholder.png') }}'">
+                </div>
+                <div class="card-body">
+                    <h2>{{ p.title }}</h2>
+                    <p class="short">{{ p.short }}</p>
+                    <p class="desc">{{ p.description }}</p>
+                    <p class="meta">
+                        <strong>Tech:</strong> {{ p.tech | join(', ') }}
+                    </p>
+                    <p class="links">
+                        <a class="btn" href="{{ p.repo }}" target="_blank" rel="noopener">View code</a>
+                        <a class="btn ghost" href="#{{ p.id }}">Details</a>
+                    </p>
+                </div>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer class="container footer">
+        <p><strong>Contact</strong> — link your email or LinkedIn in the template variables.</p>
+    </footer>
+</body>
+
+</html>

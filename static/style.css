@@ -1,0 +1,105 @@
+:root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --accent: #0f62fe;
+    --radius: 10px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body {
+    background: var(--bg);
+    color: #111;
+    margin: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.hero {
+    padding: 32px 0;
+    text-align: left;
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.lead {
+    color: var(--muted);
+    margin: 0 0 16px;
+}
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-media img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background: #e9eef8;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-body h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+}
+
+.card-body .short {
+    color: var(--muted);
+    margin: 0 0 8px;
+}
+
+.card-body .desc {
+    margin: 0 0 12px;
+    color: #222;
+    line-height: 1.4;
+}
+
+.meta {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(15, 98, 254, 0.16);
+}
+
+.footer {
+    padding: 20px 0;
+    color: var(--muted);
+    font-size: 14px;
+}

@@ -4,47 +4,118 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Project Showcase</title>
+    <title>{% if lang == 'es' %}Muestra de Proyectos{% else %}Project Showcase{% endif %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <form method="get" action="{{ url_for('index') }}">
+            <input type="hidden" name="page" value="{{ page }}">
+            <select name="lang" onchange="this.form.submit()">
+                <option value="en" {% if lang=='en' %}selected{% endif %}>ENG</option>
+                <option value="es" {% if lang=='es' %}selected{% endif %}>ESP</option>
+            </select>
+        </form>
+    </div>
+
     <header class="hero">
         <div class="container">
-            <h1>Project Showcase</h1>
-            <p class="lead">Selected Flask and Python projects demonstrating traceability, automation, and
-                production-ready patterns.</p>
+            <h1>{% if lang == 'es' %}Muestra de Proyectos{% else %}Project Showcase{% endif %}</h1>
+            <p class="lead">
+                {% if lang == 'es' %}
+                Proyectos seleccionados en Flask y Python que demuestran trazabilidad, automatización y patrones listos
+                para producción.
+                {% else %}
+                Selected Flask and Python projects demonstrating traceability, automation, and production-ready
+                patterns.
+                {% endif %}
+            </p>
         </div>
     </header>
 
     <main class="container">
         <section class="projects">
             {% for p in projects %}
-            <article class="card">
+            <article class="card mb-4">
                 <div class="card-media">
-                    <img src="{{ p.screenshot }}" alt="{{ p.title }} screenshot"
-                        onerror="this.src='{{ url_for('static', filename='screenshots/placeholder.png') }}'">
+                    <!-- Bootstrap Carousel -->
+                    <div id="carousel{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for img in p.screenshot_urls %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img src="{{ img }}" class="d-block w-100" alt="{{ p.title }} screenshot"
+                                    onerror="this.src='{{ url_for('static', filename='screenshots/UNGA.jpg') }}'">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ loop.index }}"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ loop.index }}"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
+
                 <div class="card-body">
                     <h2>{{ p.title }}</h2>
                     <p class="short">{{ p.short }}</p>
                     <p class="desc">{{ p.description }}</p>
                     <p class="meta">
-                        <strong>Tech:</strong> {{ p.tech | join(', ') }}
+                        <strong>{% if lang == 'es' %}Tecnologías:{% else %}Tech:{% endif %}</strong>
+                        {% for tech in p.tech %}
+                        <span>{{ tech }}</span>
+                        {% endfor %}
                     </p>
                     <p class="links">
-                        <a class="btn" href="{{ p.repo }}" target="_blank" rel="noopener">View code</a>
-                        <a class="btn ghost" href="#{{ p.id }}">Details</a>
+                        <a class="btn" href="{{ p.repo }}" target="_blank" rel="noopener">
+                            {% if lang == 'es' %}Ver código{% else %}View code{% endif %}
+                        </a>
+                        <a class="btn ghost" href="#{{ p.id }}">
+                            {% if lang == 'es' %}Detalles{% else %}Details{% endif %}
+                        </a>
                     </p>
                 </div>
             </article>
             {% endfor %}
         </section>
+
+        <!-- Pagination -->
+        <nav class="pagination-nav">
+            <ul class="pagination justify-content-center">
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('index', page=p, lang=lang) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
     </main>
 
     <footer class="container footer">
-        <p><strong>Contact</strong> — link your email or LinkedIn in the template variables.</p>
+        <p>
+            <strong>{% if lang == 'es' %}Contacto{% else %}Contact{% endif %}</strong> —
+            {% if lang == 'es' %}
+            Conéctate conmigo en <a href="https://www.linkedin.com/in/dgiraldopalacio/" target="_blank"
+                rel="noopener">LinkedIn</a>.
+            {% else %}
+            Connect with me on <a href="https://www.linkedin.com/in/dgiraldopalacio/" target="_blank"
+                rel="noopener">LinkedIn</a>.
+            {% endif %}
+        </p>
     </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

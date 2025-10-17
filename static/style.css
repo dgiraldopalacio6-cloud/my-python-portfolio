@@ -3,7 +3,7 @@
     --card: #ffffff;
     --muted: #6b7280;
     --accent: #0f62fe;
-    --radius: 10px;
+    --radius: 2%;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
@@ -20,7 +20,7 @@ body {
 }
 
 .hero {
-    padding: 32px 0;
+    padding: 0px 0;
     text-align: left;
 }
 
@@ -49,11 +49,20 @@ h1 {
     flex-direction: column;
 }
 
-.card-media img {
+.card-media img,
+.card-media .carousel-item img {
     width: 100%;
-    height: 160px;
+    height: 500px;
     object-fit: cover;
     background: #e9eef8;
+    border-bottom: 1px solid #ddd;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    padding: 8px;
 }
 
 .card-body {
@@ -82,6 +91,21 @@ h1 {
     font-size: 14px;
 }
 
+.meta strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.meta span {
+    display: inline-block;
+    background: #e9eef8;
+    color: #333;
+    padding: 4px 8px;
+    margin: 2px 4px 2px 0;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
 .btn {
     display: inline-block;
     padding: 8px 12px;
@@ -90,6 +114,7 @@ h1 {
     color: #fff;
     text-decoration: none;
     margin-right: 8px;
+    font-weight: 500;
 }
 
 .btn.ghost {
@@ -102,4 +127,95 @@ h1 {
     padding: 20px 0;
     color: var(--muted);
     font-size: 14px;
+}
+
+/* Pagination styles */
+.pagination-nav {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.pagination {
+    display: inline-flex;
+    gap: 6px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.page-item {
+    display: inline-block;
+}
+
+.page-link {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--accent);
+    border: 1px solid rgba(15, 98, 254, 0.16);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.page-item.active .page-link {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .card-media 
+    
+    .carousel-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            /* Optional: light background for contrast */
+            height: 500px;
+            /* Fixed height for consistent layout */
+        }
+    
+    .carousel-item img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        padding: 25px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+    .card-body h2 {
+        font-size: 16px;
+    }
+
+    .card-body .desc {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .pagination-nav {
+        margin-top: 24px;
+    }
+}
+.language-toggle {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    z-index: 1000;
+}
+
+.language-toggle select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-weight: 500;
 }

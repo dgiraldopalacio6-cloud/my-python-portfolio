@@ -109,5 +109,20 @@ def index():
 
     return render_template("index.html", projects=paginated_projects, page=page, total_pages=total_pages, lang=lang)
 
+@app.route("/workin")
+def workin():
+    lang = request.args.get("lang", "en")
+    message = {
+        "en": {
+            "title": "Work in Progress",
+            "body": "Thanks for your interest! I'm currently updating this section to reflect the latest work. Please check back soon."
+        },
+        "es": {
+            "title": "Trabajo en Progreso",
+            "body": "¡Gracias por tu interés! Actualmente estoy actualizando esta sección para reflejar el trabajo más reciente. Vuelve pronto."
+        }
+    }
+    return render_template("workin.html", lang=lang, message=message[lang])
+
 if __name__ == "__main__":
     app.run(debug=True)

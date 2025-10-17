@@ -77,10 +77,10 @@
                         {% endfor %}
                     </p>
                     <p class="links">
-                        <a class="btn" href="{{ p.repo }}" target="_blank" rel="noopener">
+                        <a class="btn" href="{{ url_for('workin', lang=lang) }}">
                             {% if lang == 'es' %}Ver código{% else %}View code{% endif %}
                         </a>
-                        <a class="btn ghost" href="#{{ p.id }}">
+                        <a class="btn ghost" href="{{ url_for('workin', lang=lang) }}">
                             {% if lang == 'es' %}Detalles{% else %}Details{% endif %}
                         </a>
                     </p>
